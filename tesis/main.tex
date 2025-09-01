@@ -79,8 +79,8 @@
 
 %% Para enumerar las líneas del PDF -------------------------------------------
 \usepackage[]{lineno} %\linenumbers
-\linenumbers
-\setlength\linenumbersep{3pt}
+% \linenumbers
+% \setlength\linenumbersep{3pt}
 %% para que funcione mejor la numeración {{{
 %% https://tex.stackexchange.com/questions/43648/why-doesnt-lineno-number-a-paragraph-when-it-is-followed-by-an-align-equation
 %\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
@@ -176,46 +176,46 @@
 % Datos generales del trabajo de graduación, tabla de contenidos etc por ahi mas cosas {{{
 \datosThesis%
 {1}%						% física 1; matemática 2
-{Implementación de canales cuánticos \\ de un qubit usando VQA}%		% Título del trabajo de graduación
+{Implementación de canales cuánticos \\ de un qubit usando Algoritmos Variacionales Cuánticos}%		% Título del trabajo de graduación
 {Felipe Antonio Ixcamparic Choy}%			% autor
 {Dr. Carlos Francisco Pineda Zorrilla\\y Dr. Ángel Giovanni Ramírez García}%			% asesor
-{junio de 2025}		% mes y año de la orden de impresión
+{agosto de 2025}		% mes y año de la orden de impresión
 {2}							% femenino 1; masculino 2
-\chapter*{AGRADECIMIENTOS}
-% \pdfbookmark[1]{AGRADECIMIENTOS}{agr}          % marca en el panel de marcadores del PDF (opcional)
-% \vspace{1em}
-A Dios por darme la bendición de haber podido estudiar esta carrera y haberme mantenido resiliente a los cambios. 
+% \chapter*{AGRADECIMIENTOS}
+% % \pdfbookmark[1]{AGRADECIMIENTOS}{agr}          % marca en el panel de marcadores del PDF (opcional)
+% % \vspace{1em}
+% A Dios por darme la bendición de haber podido estudiar esta carrera y haberme mantenido resiliente a los cambios. 
     
-A mi señora madre, Siria,  por siempre acompañarme en los peores y mejores momentos que tuve, siempre te voy a querer. Los chocolates de medianoche eran más dulces cuando me los regalabas, más aún cuando te quedabas acompañándome hasta las 3am. 
+% A mi señora madre, Siria,  por siempre acompañarme en los peores y mejores momentos que tuve, siempre te voy a querer. Los chocolates de medianoche eran más dulces cuando me los regalabas, más aún cuando te quedabas acompañándome hasta las 3am. 
 
-A mi padre, Erick, por haberme dado el empujón que necesitaba para entrar a esta carrera, así como nunca habernos dejado atrás a mi hermano y a mí. 
+% A mi padre, Erick, por haberme dado el empujón que necesitaba para entrar a esta carrera, así como nunca habernos dejado atrás a mi hermano y a mí. 
 
-A mi hermano Josué, por ser mi guía desde antes de entrar a la universidad , ayudarme y cuidarme siempre. Creo que no hay persona que no me conozca sin conocerte por lo buena persona que sos. 
+% A mi hermano Josué, por ser mi guía desde antes de entrar a la universidad , ayudarme y cuidarme siempre. Creo que no hay persona que no me conozca sin conocerte por lo buena persona que sos. 
 
-A mi hermana, Kristel, por ser alegría y mi motivación para seguir adelante desde el momento que nació. 
+% A mi hermana, Kristel, por ser alegría y mi motivación para seguir adelante desde el momento que nació. 
 
-A Carlos Pineda, por el tiempo y dedicación que tuvo conmigo en todo momento desde el inicio de mis prácticas supervisadas, así como este proyecto. Agradezco enteramente los proyectos CBF-2025-I-1548 (SECIHTI) y UNAM-PAPIIT IG101324. Haber convivido con el grupo de mecánica cuántica de la UNAM, ha sido una experienciai maravillosa. Los conocimientos, mejora de redacción y calidad de informe no habría sido sin el apoyo del grupo. 
+% A Carlos Pineda, por el tiempo y dedicación que tuvo conmigo en todo momento desde el inicio de mis prácticas supervisadas, así como este proyecto. Agradezco enteramente los proyectos CBF-2025-I-1548 (SECIHTI) y UNAM-PAPIIT IG101324. Haber convivido con el grupo de mecánica cuántica de la UNAM, ha sido una experienciai maravillosa. Los conocimientos, mejora de redacción y calidad de informe no habría sido sin el apoyo del grupo. 
 
-A Juan Diego Chang y Giovanni Ramirez, por haber sido no solo mis guías, sino mis pilares de conocimiento, sobre los que adquirí el gusto por la mecánica cuántica , materia condensada y la computación cuántica. Además de ser grandes personas que me tuvieron paciencia dentro y fuera de clases, son personas bastante admirables.
+% A Juan Diego Chang y Giovanni Ramirez, por haber sido no solo mis guías, sino mis pilares de conocimiento, sobre los que adquirí el gusto por la mecánica cuántica , materia condensada y la computación cuántica. Además de ser grandes personas que me tuvieron paciencia dentro y fuera de clases, son personas bastante admirables.
 
-A Marco Cerezo, así como el curso de Física sin Fronteras del año 2021, por haber sido una gran fuente de inspiración en este proyecto y mi gusto por la computación cuántica. 
+% A Marco Cerezo, así como el curso de Física sin Fronteras del año 2021, por haber sido una gran fuente de inspiración en este proyecto y mi gusto por la computación cuántica. 
 
-A todos los profesores de la ECFM que me impartieron cursos a lo largo de la carrera. No creo haber conocido profesionales que hayan dedicado una atención al detalle y cariño por la ciencia como ellos. Gracias por siempre haber sido pacientes conmigo. 
+% A todos los profesores de la ECFM que me impartieron cursos a lo largo de la carrera. No creo haber conocido profesionales que hayan dedicado una atención al detalle y cariño por la ciencia como ellos. Gracias por siempre haber sido pacientes conmigo. 
 
-A José Alfredo de León, por haber sido un auxiliar y profesor extraordinario, además de haber sido quien me presentó con Carlos. También por haberme ayudado cuando tenía dudas referentes a cuántica, no había necesidad de responderme y apoyarme tanto, agradezco enteramente la dedicación con la que trabajaste. 
+% A José Alfredo de León, por haber sido un auxiliar y profesor extraordinario, además de haber sido quien me presentó con Carlos. También por haberme ayudado cuando tenía dudas referentes a cuántica, no había necesidad de responderme y apoyarme tanto, agradezco enteramente la dedicación con la que trabajaste. 
 
-A Subadra, por ser más que una tutora, una gran amiga con quien pude mejorar como persona, hablar de mis problemas y mejorar mi redacción. No tengo palabras para agradecer el tiempo que dedicaste en resolver mis dudas y ayudarme cada vez que te lo pedía. 
+% A Subadra, por ser más que una tutora, una gran amiga con quien pude mejorar como persona, hablar de mis problemas y mejorar mi redacción. No tengo palabras para agradecer el tiempo que dedicaste en resolver mis dudas y ayudarme cada vez que te lo pedía. 
 
-A mis mejores amigos de la carrera: Bryant, Hugo, Jeff , Pablo, Mario, José (Flint), Josué (Yoshi), Andy, Nacho y Laura. Por ser las personas más fieles, confiables y divertidas con quien he convivido. No olvido ni olvidaré ningún momento que pasamos en cursos, jugando smash, noches en discord ni parqueazos que tuvimos en la universidad. Me dieron el soporte más grande que necesitaba a lo largo de la carrera. El cariño que les tengo es enorme, sepan que no podría haber conocido mejores personas. 
+% A mis mejores amigos de la carrera: Bryant, Hugo, Jeff , Pablo, Mario, José (Flint), Josué (Yoshi), Andy, Nacho y Laura. Por ser las personas más fieles, confiables y divertidas con quien he convivido. No olvido ni olvidaré ningún momento que pasamos en cursos, jugando smash, noches en discord ni parqueazos que tuvimos en la universidad. Me dieron el soporte más grande que necesitaba a lo largo de la carrera. El cariño que les tengo es enorme, sepan que no podría haber conocido mejores personas. 
 
-A todos los amigos que hice dentro y fuera de la U, gracias por siempre decirme que era pilas aún sin sentirlo, o hacerme sentir mejor con frases como 'Mi Lic' o 'Fisiquin', las pequeñas acciones tuvieron un gran impacto en mi persona. 
+% A todos los amigos que hice dentro y fuera de la U, gracias por siempre decirme que era pilas aún sin sentirlo, o hacerme sentir mejor con frases como 'Mi Lic' o 'Fisiquin', las pequeñas acciones tuvieron un gran impacto en mi persona. 
 
-A mi mascota Rex, que ha estado siempre cuidándome mañana y noche que he trabajado, siempre te llevo en el corazón.
-\chapter*{DEDICATORIA}
-\begin{flushright}
-\textit{Para mamá y papá,} \\
-\textit{su hijo al fin terminó.}  \\
-\end{flushright}
+% A mi mascota Rex, que ha estado siempre cuidándome mañana y noche que he trabajado, siempre te llevo en el corazón.
+% \chapter*{DEDICATORIA}
+% \begin{flushright}
+% \textit{Para mamá y papá,} \\
+% \textit{su hijo al fin terminó.}  \\
+% \end{flushright}
 
 \frontmatter
 \tableofcontents    % Índice general vinculado
@@ -257,7 +257,7 @@ A mi mascota Rex, que ha estado siempre cuidándome mañana y noche que he traba
 % \phantomsection
 \addcontentsline{toc}{chapter}{OBJETIVOS}
 \section*{General} 
-Estudiar y desarrollan algoritmos variacionales cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
+Estudiar y desarrollar algoritmos variacionales cuánticos para la implementación de canales cuánticos de un  qubit en computadoras cuánticas.
 
 \section*{Específicos}
 \begin{itemize}
@@ -1408,7 +1408,7 @@ lo que la estructura del \textit{ansatz} es:
  \label{ec:ansatz}
      U(\bm{\theta}) =\prod_{i=1}^{M} \prod_{j=1}^N U_{ent} (\theta_i)R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}),
  \end{equation}
-donde $N$ y $M$ son el número de qubits y capas en el circuito respectivamente.
+donde $N$ y $M$ son el número de capas y qubits en el circuito respectivamente.
 Para la parte de entrelazamiento $U_{ent}$ tomamos compuertas de control
 $cR_y$.  En este esquema, los parámetros $\bm{\theta}$ corresponden a los
 ángulos de rotación de las compuertas del \textit{ansatz}. Este circuito puede
