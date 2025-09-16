@@ -14,6 +14,10 @@
 \usepackage{bm}
 \usepackage{subcaption}
 \usepackage{braket}     
+\usetikzlibrary{quantikz}
+\usepackage{amssymb}	
+\usepackage{amsbsy}
+\usepackage{physics}
 %----------------------------------------------------------------------------------------
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -60,99 +64,306 @@
 %------------------------------------------------
 
 \begin{frame}{Introducción}
-    \begin{itemize}
-        \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        \item Aliquam blandit faucibus nisi, sit amet dapibus enim tempus eu
-        \item Nulla commodo, erat quis gravida posuere, elit lacus lobortis est, quis porttitor odio mauris at libero
-        \item Nam cursus est eget velit posuere pellentesque
-        \item Vestibulum faucibus velit a augue condimentum quis convallis nulla gravida
-    \end{itemize}
+\vspace{-0.4em}
+\begin{itemize}
+    \item En la computación cuántica, modelar cómo evoluciona un sistema abierto es fundamental.
     
+    \medskip
+    \item Esto se describe mediante \textbf{canales cuánticos}: operadores que representan la interacción del sistema con su entorno.
+
+    \medskip
+    \item Sin embargo, los canales cuánticos ideales son difíciles de implementar en dispositivos reales debido al \textbf{ruido cuántico}.
+
+    \medskip
+    \item ¿Cómo podemos implementar y validar estos canales en una computadora cuántica actual?
+\end{itemize}
 \end{frame}
+%------------------------------------------------
+
+% \begin{frame}{Blocks of Highlighted Text}
+%     In this slide, some important text will be \alert{highlighted} because it's important. Please, don't abuse it.
+
+%     \begin{block}{Block}
+%         Sample text
+%     \end{block}
+
+%     \begin{alertblock}{Alertblock}
+%         Sample text in red box
+%     \end{alertblock}
+
+%     \begin{examples}
+%         Sample text in green box. The title of the block is ``Examples".
+%     \end{examples}
+% \end{frame}
 
 %------------------------------------------------
 
-\begin{frame}{Blocks of Highlighted Text}
-    In this slide, some important text will be \alert{highlighted} because it's important. Please, don't abuse it.
+% \begin{frame}{Multiple Columns}
+%     \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-    \begin{block}{Block}
-        Sample text
-    \end{block}
+%         \column{.45\textwidth} % Left column and width
+%         \textbf{Heading}
+%         \begin{enumerate}
+%             \item Statement
+%             \item Explanation
+%             \item Example
+%         \end{enumerate}
 
-    \begin{alertblock}{Alertblock}
-        Sample text in red box
-    \end{alertblock}
+%         \column{.45\textwidth} % Right column and width
+%         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
 
-    \begin{examples}
-        Sample text in green box. The title of the block is ``Examples".
-    \end{examples}
-\end{frame}
-
-%------------------------------------------------
-
-\begin{frame}{Multiple Columns}
-    \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
-
-        \column{.45\textwidth} % Left column and width
-        \textbf{Heading}
-        \begin{enumerate}
-            \item Statement
-            \item Explanation
-            \item Example
-        \end{enumerate}
-
-        \column{.45\textwidth} % Right column and width
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus nisl, ultricies in feugiat rutrum, porttitor sit amet augue. Aliquam ut tortor mauris. Sed volutpat ante purus, quis accumsan dolor.
-
-    \end{columns}
-\end{frame}
+%     \end{columns}
+% \end{frame}
 
 %------------------------------------------------
-\section{Conceptos Fundamentales (Pendiente) }
+\section{Conceptos Fundamentales}
 %------------------------------------------------
 
-\begin{frame}{Table}
-    \begin{table}
-        \begin{tabular}{l l l}
-            \toprule
-            \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-            \midrule
-            Treatment 1         & 0.0003262           & 0.562               \\
-            Treatment 2         & 0.0015681           & 0.910               \\
-            Treatment 3         & 0.0009271           & 0.296               \\
-            \bottomrule
-        \end{tabular}
-        \caption{Table caption}
-    \end{table}
-\end{frame}
 
-%------------------------------------------------
+\begin{frame}{Conceptos Fundamentales}
+\framesubtitle{Matriz Densidad}
 
-\begin{frame}{Theorem}
-    \begin{theorem}[Mass--energy equivalence]
-        $E = mc^2$
-    \end{theorem}
-\end{frame}
+\begin{columns}
+    \column{0.60\textwidth}
+    \begin{itemize}
+        \item Un estado cuántico puro se representa por un vector $\ket{\psi}$ en un espacio de Hilbert.
 
-%------------------------------------------------
+        \medskip
+        \item Si el sistema no está en un solo estado, usamos una combinación estadística: un estado mixto.
 
-\begin{frame}{Figure}
-    Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
-    %\begin{figure}
-    %\includegraphics[width=0.8\linewidth]{test}
-    %\end{figure}
-\end{frame}
+        \medskip
+        \item Ambos casos se describen con la \textbf{matriz densidad} $\rho$.
 
-%------------------------------------------------
+        \medskip
+        \item Cuando el sistema está compuesto por dos partes ($A$ y $B$), podemos usar la \textbf{traza parcial} para estudiar solo una de ellas.
 
-\begin{frame}[fragile] % Need to use the fragile option when verbatim is used in the slide
-    \frametitle{Citation}
-    An example of the \verb|\cite| command to cite within the presentation:\\~
+    \end{itemize}
 
-    This statement requires citation \cite{p1}.
+    \column{0.42\textwidth}
+    \bigskip
+    $$
+    \ket{\psi} = \sum_i c_i \ket{i}
+    $$
+    \bigskip
+    $$
+    \rho =\begin{cases}
+        \ket{\psi}\bra{\psi} & \text{(puro)} \\
+        \sum_i p_i \ket{\psi_i} \bra{\psi_i} & \text{(mixto)}
+    \end{cases}
+    $$
+    \medskip
+    $$
+    \rho_{AB} = \rho_A \otimes \rho_B
+    $$
+    $$
+    \rho_A = \text{Tr}_B(\rho_{AB})
+    $$
+    $$
+    \rho_A = \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B})
+    $$
+\end{columns}
 \end{frame}
 
 
+
+
+% \begin{frame}{Conceptos Fundamentales}
+% \framesubtitle{Circuitos Cuánticos: Rotaciones y Superposición}
+
+% \begin{columns}
+%     \column{0.60\textwidth}
+%     \begin{itemize}
+%         \item Un qubit puede visualizarse como un punto sobre la \textbf{esfera de Bloch}, descrito por ángulos $\theta$ y $\phi$.
+
+%         \medskip
+%         \item Las \textbf{compuertas de rotación} $R_x$, $R_y$, $R_z$ modifican la orientación del qubit sobre esta esfera.
+
+%         \medskip
+%         \item La \textbf{compuerta Hadamard} genera una superposición equilibrada de $\ket{0}$ y $\ket{1}$.
+%     \end{itemize}
+
+%     \column{0.42\textwidth}
+%     \small
+%     \textbf{Estado en la esfera de Bloch:}
+%     $$
+%     \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{i\phi} \sin\left(\frac{\theta}{2}\right)\ket{1}
+%     $$
+%     \textbf{Rotaciones:}
+%     \vspace{-1ex}
+%     \begin{align*}
+%     R_x(\theta) &= \begin{pmatrix} \cos(\theta) & -i\sin(\theta) \\ -i\sin(\theta) & \cos(\theta) \end{pmatrix} \\
+%     R_y(\theta) &= \begin{pmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{pmatrix} \\
+%     R_z(\theta) &= \begin{pmatrix} e^{-i\theta} & 0 \\ 0 & e^{i\theta} \end{pmatrix}
+%     \end{align*}
+%     \textbf{Hadamard:}
+%     $$
+%     H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}
+%     $$
+% \end{columns}
+% \end{frame}
+%==========================================
+\begin{frame}{Conceptos Fundamentales}
+\framesubtitle{Canales Cuánticos}
+
+\begin{columns}
+    \column{0.60\textwidth}
+    \begin{itemize}
+        \item Un \textbf{canal cuántico} $\mathcal{E}$ describe cómo evoluciona un estado cuántico, incluyendo interacciones con el entorno (ruido).
+
+        \medskip
+        \item Estos canales deben ser:
+        \begin{itemize}
+            \item \textbf{Completamente positivos (CP)}
+            \item \textbf{Preservadores de la traza (TP)}
+        \end{itemize}
+
+        \bigskip
+        \item Se pueden representar mediante una \textbf{matriz de Choi}, que es única para cada canal.
+    \end{itemize}
+
+    \column{0.42\textwidth}
+    \vspace{2 em}
+    $$
+    \mathcal{E}(\rho) \rightarrow \rho'
+    $$
+    % \smallskip
+    $$
+    \Lambda_{\mathcal{E}} = \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j})
+    $$
+    $$
+    \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]
+    $$
+    \begin{itemize}
+        \item $\Lambda_{\mathcal{E}}$ es positiva semidefinida para un mapeo CP. 
+        \item $\mathrm{Tr}_2(\Lambda) = I$ ssi es TP.
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+%======================================
+\begin{frame}{Conceptos Fundamentales}
+\framesubtitle{Circuitos Cuánticos}
+
+\begin{columns}
+\column{0.50\textwidth}
+\begin{itemize}
+    \item Un circuito cuántico es una secuencia de operaciones sobre uno o más \textbf{qubits}, representados por líneas horizontales.
+
+    \medskip
+    \item Las \textbf{compuertas cuánticas} son operadores que modifican el estado del qubit, se representan por 'cajas'.
+
+    \medskip
+    \item Las compuertas que involucran múltiples qubits, son \textbf{compuertas de control}.
+
+    \medskip
+    \item Una \textbf{medición} colapsa el estado cuántico en un resultado clásico.
+\end{itemize}
+
+\column{0.42\textwidth}
+\begin{figure}[h]
+    \centering
+    \begin{quantikz}
+    \lstick{$\ket{0}$} & \gate{X} & \ctrl{1} & \qw  & \meter{} \\
+    \lstick{$\ket{0}$} & \qw & \gate{R_y} & \qw  & \qw
+    \end{quantikz}
+\end{figure}
+
+\smallskip
+\begin{itemize}
+    \item[] \begin{quantikz}
+       \lstick{$\ket{\psi}$} & \qw
+    \end{quantikz} = qubit
+    \item[] \begin{quantikz}
+        \gate{X}
+    \end{quantikz} = compuerta
+    \item[] $\bullet$ = control
+    \item[] \begin{quantikz}
+        \meter{}
+    \end{quantikz} = medición
+\end{itemize}
+
+\end{columns}
+\end{frame}
+%=========================================
+
+
+
+\begin{frame}{Conceptos Fundamentales}
+\framesubtitle{Tomografía y Fidelidad de Proceso}
+
+\begin{columns}
+    \column{0.65\textwidth}
+    \begin{itemize}
+        \item La \textbf{tomografía de proceso} permite reconstruir un canal cuántico $\mathcal{E}$ a partir de mediciones sobre diferentes estados de entrada.
+
+        \medskip
+        \item Las salidas $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$ permiten reconstruir $\Lambda_{\mathcal{E}}$.
+
+        \medskip
+        \item La \textbf{fidelidad de proceso} compara la matriz de Choi reconstruida con la ideal:
+    \end{itemize}
+
+    \begin{equation*}
+    \begin{aligned}
+    F_{\text{proc}} &= \frac{1}{d^2}F(\Lambda_{\mathcal{E}}, \Lambda_{\mathcal{F}}), \\
+    \text{donde } F(\Lambda_{\mathcal{E}}, \Lambda_{\mathcal{F}}) &= \text{Tr} \sqrt{\Lambda_{\mathcal{E}}^{1/2} \Lambda_{\mathcal{F}} \Lambda_{\mathcal{E}}^{1/2} } 
+    \end{aligned}
+    \end{equation*}
+
+    \column{0.30\textwidth}
+    
+    \vspace{0.5em}
+    \begin{quantikz}
+    \lstick{$\ket{0}$}  & \gate{\mathcal{E}} & \qw & \rstick{$\rho_1$} \\
+    \lstick{$\ket{1}$}  & \gate{\mathcal{E}} & \qw & \rstick{$\rho_2$} \\
+    \lstick{$\ket{+}$}  & \gate{\mathcal{E}} & \qw & \rstick{$\rho_3$} \\
+    \lstick{$\ket{+i}$} & \gate{\mathcal{E}} & \qw & \rstick{$\rho_4$}
+    \end{quantikz}
+
+    \vspace{1em}
+    \small
+    $\rho_j = \mathcal{E}(\ketbra{\psi_j}{\psi_j})$
+\end{columns}
+\end{frame}
+
+
+%=================
+% \begin{frame}{Table}
+%     \begin{table}
+%         \begin{tabular}{l l l}
+%             \toprule
+%             \textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
+%             \midrule
+%             Treatment 1         & 0.0003262           & 0.562               \\
+%             Treatment 2         & 0.0015681           & 0.910               \\
+%             Treatment 3         & 0.0009271           & 0.296               \\
+%             \bottomrule
+%         \end{tabular}
+%         \caption{Table caption}
+%     \end{table}
+% \end{frame}
+
+%------------------------------------------------
+
+% \begin{frame}{Theorem}
+%     \begin{theorem}[Mass--energy equivalence]
+%         $E = mc^2$
+%     \end{theorem}
+% \end{frame}
+
+%------------------------------------------------
+
+% \begin{frame}{Figure}
+%     Uncomment the code on this slide to include your own image from the same directory as the template .TeX file.
+%     %\begin{figure}
+%     %\includegraphics[width=0.8\linewidth]{test}
+%     %\end{figure}
+% \end{frame}
+
+%------------------------------------------------
+
+
+%--------------------------------------------------
 
 \section{Algoritmos Variacionales Cuánticos}
 %------------------------------------------------
@@ -186,7 +397,7 @@
        
         \item Escogimos el HEA:
         \begin{equation*}
-        \label{ec:ansatz}
+        % \label{ec:ansatz}
              U(\bm{\theta}) =\prod_{i=1}^{M} \prod_{j=1}^N U_{ent} (\theta_i)R_z(\theta_{ij})R_x(\theta_{ij2})R_z(\theta_{ij3}).
          \end{equation*}
     \end{itemize}
@@ -204,7 +415,7 @@
         \begin{figure}
             \centering
             \includegraphics[width=0.75\linewidth]{imagenes/esquema_dp_v1.png}
-            \label{fig:placeholder}
+            % \label{fig:placeholder}
         \end{figure}
 \end{frame}
 
@@ -222,7 +433,8 @@
             \mathcal{E(\rho)}= \text{Tr}(\rho) p \frac{I}{2} + (1-p) \rho.
             \end{equation*}
   \item {} 
-  \begin{equation*}\label{eq:choi_depolarizing}
+  \begin{equation*}
+  % \label{eq:choi_depolarizing}
     \Lambda_{\mathcal E}=\Lambda_{\text{obj}}=
     \begin{pmatrix}
       1-\frac{p}{2} & 0 & 0 & 1-p \\
@@ -237,7 +449,7 @@
         \begin{figure}
             \centering
             \includegraphics[width=1\linewidth]{imagenes/efecto_depolarizing.png}
-            \label{fig:placeholder}
+            % \label{fig:placeholder}
         \end{figure}
     \end{columns}
 \end{frame}
@@ -260,100 +472,112 @@
 
 \begin{frame}{Resultados}
 \framesubtitle{Restricciones y ejecuciones}
-  \begin{itemize}
-    \item Fijamos hiperparámetros: HEA de 1 capa y 2 qubits.
-    \begin{center}
-            \includegraphics[width=0.60\textwidth]{imagenes/comparacion_capas.png}
-          \end{center}
-    % \item Tiempo máximo de ejecución (gratuito) mensual: 10 minutos.
-    % \item Ejecución promedio por tomografía de proceso: 16 segundos.
-    % \item Validación con tomografía 4 veces en simulador cuántico y 1 vez en computadora cuántica.
-    % \item Ejecutamos para 38 valores distintos de $p$.
-  \end{itemize}
+
+\begin{columns}
+    \column{0.50\textwidth}
+    \begin{itemize}
+        \item Se fijaron hiperparámetros: HEA de 1 capa y 2 qubits.
+        \item Tiempo máximo de ejecución (gratuito) mensual: 10 minutos.
+        \item Cada tomografía de proceso toma en promedio 16 segundos.
+        \item Validación realizada:
+        \begin{itemize}
+            \item 4 veces en el simulador cuántico.
+            \item 1 vez en la computadora cuántica.
+        \end{itemize}
+        \item Ejecutamos para 38 valores distintos de $p$.
+    \end{itemize}
+
+    \column{0.60\textwidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/comparacion_capas.png}
+\end{columns}
+
 \end{frame}
 
 
 %=======================================================
 \begin{frame}{Resultados}
 \framesubtitle{Fidelidades}
-    \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-        \column{.60\textwidth} % Left column and width
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.25]{imagenes/comparacion fidelidad.png}
-    \label{fig:Bloch}
-\end{figure}
-        \column{.45\textwidth} % Right column and width
-\begin{table}[htbp]
-\centering 
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|l|c|c|}
-\hline
-\textbf{Métrica} & \textbf{Aer Simulator} & \textbf{ibm-kyoto} \\ \hline
-Mediana           & 0.9618 & 0.8916 \\ \hline
-Mínimo            & 0.7620 & 0.5533 \\ \hline
-Máximo            & 0.9925 & 0.9738 \\ \hline
-p(max)            & 0.975  & 0.825  \\ \hline
-p(min)            & 0.725  & 0.125  \\ \hline
-Desv. Estándar    & 0.0418 & 0.0899 \\ \hline
-\end{tabular}
-}
-\label{tab:comparacion_fidelidades}
-\end{table}
-    \end{columns}
+\begin{columns}
+    \column{.55\textwidth}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.25]{imagenes/comparacion fidelidad.png}
+    \end{figure}
+
+    \column{.45\textwidth}
+    \begin{itemize}
+        \item El simulador cuántico (\texttt{AerSimulator}) mantiene fidelidades altas y estables ante la depolarización.
+        \item El dispositivo real (\texttt{ibm-kyoto}) presenta mayor variabilidad y fidelidades más bajas.
+        
+        \medskip
+        \item \textbf{Aer:} 
+        \begin{itemize}
+            \item Mediana: 0.96, Mínimo: 0.76
+            \item Desv. estándar: 0.04
+        \end{itemize}
+        
+        \item \textbf{ibm-kyoto:}
+        \begin{itemize}
+            \item Mediana: 0.89, Mínimo: 0.55
+            \item Desv. estándar: 0.09
+        \end{itemize}
+    \end{itemize}
+\end{columns}
 \end{frame}
 %=================================================================
-
 \begin{frame}{Resultados}
 \framesubtitle{Completa Positividad}
-\begin{figure}[h!] 
-    \centering 
-    \includegraphics[width=0.7 \linewidth]{imagenes/eigenvalores_comparacion.png}
-    \label{fig:comparacion_autovalores}
-\end{figure}
+
+\begin{columns}[c] % "c" para centrado vertical
+
+    \column{0.40\textwidth}
+    \begin{itemize}
+        \item Evaluamos la \textbf{completa positividad (CP)} a través de los autovalores de las matrices de Choi reconstruidas.
+        \item En todos los casos, los autovalores fueron $\geq 0$, cumpliendo con la condición de CP tanto en simulaciones como en hardware real.
+    \end{itemize}
+
+    \column{0.60\textwidth}
+    \vspace{-1em} % opcional para ajustar espacio superior
+    \hspace*{-1.5em} % mueve la imagen a la izquierda
+    \includegraphics[width=\linewidth]{imagenes/eigenvalores_comparacion.png}
+    
+\end{columns}
+
 \end{frame}
 
 
 \begin{frame}{Resultados}
 \framesubtitle{Preservación de la Traza}
-\begin{figure}
-  \centering
 
-  % ===== Fila 1 =====
-  \begin{subfigure}[t]{0.50\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{imagenes/ident_comp_0.1.png}
-    \caption{$p=0.1$}
-    \label{fig:2x2_01}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.50\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{imagenes/ident_comp_0.5.png}
-    \caption{$p=0.5$}
-    \label{fig:2x2_02}
-  \end{subfigure}
+\begin{columns}[c] % Centrado vertical
+    \column{0.40\textwidth}
+    \begin{itemize}
+        \item Evaluamos la \textbf{preservación de la traza (TP)} sobre las matrices de Choi reconstruidas.
+        
+        \medskip
+        \item Ninguna de las matrices reconstruidas cumple exactamente con $\mathrm{Tr}_2(\Lambda) = I$.
 
-  \par\vspace{0.6em}
+        \medskip
+        \item La traza parcial fue cercana a la identidad, pero se observaron componentes fuera de la diagonal.
+    \end{itemize}
 
-  % ===== Fila 2 =====
-  \begin{subfigure}[t]{0.50\textwidth}
+    \column{0.50\textwidth}
     \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{imagenes/ident_comp_0.7.png}
-    \caption{$p=0.7$}
-    \label{fig:2x2_03}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.50\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{imagenes/ident_comp_0.9.png}
-    \caption{$p=0.9$}
-    \label{fig:2x2_04}
-  \end{subfigure}
+    \includegraphics[width=\linewidth, height=0.55\textheight, keepaspectratio]{imagenes/ident_comp_0.1.png}
+    
+    {\scriptsize $p = 0.1$}
 
-  % \caption{Comparación 2×2 (texto opcional para título general).}
-  \label{fig:2x2_grid}
-\end{figure}
+    \vspace{1em}
+
+    \includegraphics[width=\linewidth, height=0.55\textheight, keepaspectratio]{imagenes/ident_comp_0.7.png}
+    
+    {\scriptsize $p = 0.7$}
+\end{columns}
+
 \end{frame}
+
 
 \begin{frame}{Resultados}
 \framesubtitle{Tendencias}
@@ -383,13 +607,29 @@ Desv. Estándar    & 0.0418 & 0.0899 \\ \hline
 \end{frame}
 
 \begin{frame}{Resultados}
- \framesubtitle{Desviación estándar}
-\begin{figure}[h!] % {{{
+\framesubtitle{Desviación estándar}
+
+\begin{columns}
+    \column{0.37\textwidth}
+    \begin{itemize}
+        \item Analizamos la \textbf{variabilidad de fidelidad} mediante la desviación estándar.
+        
+      
+        \medskip
+        \item En la computadora cuántica, la desviación disminuye al aumentar $p$, consistente con la regresión lineal.
+
+        \medskip
+        \item Para $p > 0.75$, ambos sistemas muestran una caída significativa en su desviación.
+    \end{itemize}
+
+    \column{0.60\textwidth}
     \centering
-    \includegraphics[width=0.95\linewidth]{imagenes/Comparacion_desviaciones.png}
-    % \caption[Comparación de desviación estándar para resultados de fidelidad de proceso]{Comparación de desviación estándar entre los resultados de la fidelidad de proceso entre la matriz de Choi esperada, la computadora cuántica \texttt{ibm\_kyoto} (color naranja) y el simualdor cuántico (color azul) \texttt{AerSimualtor()}. La desviación estándar se calcula sobre los valores de fidelidad en el intervalo de $p$. \textbf{Fuente:} elaboración propia.}
-    \label{fig:comparacion_desviaciones}
-\end{figure} % }}}
+    \includegraphics[width=\linewidth]{imagenes/Comparacion_desviaciones.png}
+
+    \vspace{0.5em}
+    {\scriptsize Comparación de desviaciones estándar.}
+\end{columns}
+
 \end{frame}
 
 \begin{frame}{Resultados}
@@ -400,40 +640,17 @@ Desv. Estándar    & 0.0418 & 0.0899 \\ \hline
     \centering
     \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.1.png}
     \caption{Resultados para $p=0.1$}
-    \label{fig:1x2_A}
+    % \label{fig:1x2_A}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.65\textwidth}
     \centering
-    \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.5.png}
-    \caption{Resultados para $p=0.5$}
-    \label{fig:1x2_B}
-  \end{subfigure}
-  % \caption{}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Resultados}
-\framesubtitle{Matrices de Choi}
-
-\begin{figure}
-  \centering
-  \begin{subfigure}[t]{0.65\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.50\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
+    \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
     \caption{Resultados para $p=0.7$}
-    \label{fig:1x2_A}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.65\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.50\textheight,keepaspectratio]{imagenes/comp_choi_p0.9.png}
-    \caption{Resultados para $p=0.9$}
-    \label{fig:1x2_B}
+    % \label{fig:1x2_B}
   \end{subfigure}
   % \caption{}
 \end{figure}
 \end{frame}
-
-
 
 
 %     \begin{table}
