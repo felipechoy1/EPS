@@ -18,6 +18,7 @@
 \usepackage{amssymb}	
 \usepackage{amsbsy}
 \usepackage{physics}
+\usetikzlibrary{fit,backgrounds} % recomendado para gategroup
 %----------------------------------------------------------------------------------------
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -126,25 +127,22 @@
 \begin{columns}
     \column{0.60\textwidth}
     \begin{itemize}
-        \item Un estado cuántico puro se representa por un vector $\ket{\psi}$ en un espacio de Hilbert.
+        \item Un estado cuántico puro se representa por un vector:
 
+        \bigskip
         \medskip
-        \item Si el sistema no está en un solo estado, usamos una combinación estadística: un estado mixto.
-
-        \medskip
-        \item Ambos casos se describen con la \textbf{matriz densidad} $\rho$.
-
+        \item La \textbf{matriz densidad} $\rho$ describe tanto estados puros como mezclas estadísticas (mixtos).
+        \bigskip
         \medskip
         \item Cuando el sistema está compuesto por dos partes ($A$ y $B$), podemos usar la \textbf{traza parcial} para estudiar solo una de ellas.
 
     \end{itemize}
 
     \column{0.42\textwidth}
-    \bigskip
     $$
     \ket{\psi} = \sum_i c_i \ket{i}
     $$
-    \bigskip
+    \smallskip
     $$
     \rho =\begin{cases}
         \ket{\psi}\bra{\psi} & \text{(puro)} \\
@@ -152,15 +150,16 @@
     \end{cases}
     $$
     \medskip
+    
     $$
-    \rho_{AB} = \rho_A \otimes \rho_B
+    \mathcal{H}_{AB} = \mathcal{H}_{A} \otimes \mathcal{H}_B
     $$
     $$
     \rho_A = \text{Tr}_B(\rho_{AB})
     $$
-    $$
-    \rho_A = \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B})
-    $$
+    % $$
+    % \rho_A = \ket{i_A} \bra{j_A} \text{Tr}(\ket{i_B}\bra{j_B})
+    % $$
 \end{columns}
 \end{frame}
 
@@ -202,89 +201,170 @@
 % \end{columns}
 % \end{frame}
 %==========================================
+% \begin{frame}{Conceptos Fundamentales}
+% \framesubtitle{Canales Cuánticos}
+
+% \begin{columns}
+%     \column{0.60\textwidth}
+%     \begin{itemize}
+%         \item Un \textbf{canal cuántico} $\mathcal{E}$ describe cómo evoluciona un estado cuántico, incluyendo interacciones con el entorno (ruido).
+
+%         \medskip
+%         \item Estos canales deben ser:
+%         \begin{itemize}
+%             \item \textbf{Completamente positivos (CP)}
+%             \item \textbf{Preservadores de la traza (TP)}
+%         \end{itemize}
+
+%         \bigskip
+%         \item Se pueden representar mediante una \textbf{matriz de Choi}, que es única para cada canal.
+%     \end{itemize}
+
+%     \column{0.42\textwidth}
+%     \vspace{2 em}
+%     $$
+%     \mathcal{E}(\rho) \rightarrow \rho'
+%     $$
+%     % \smallskip
+%     $$
+%     \Lambda_{\mathcal{E}} = \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j})
+%     $$
+%     % $$
+%     % \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]
+%     % $$
+%     \begin{itemize}
+%         \item $\Lambda_{\mathcal{E}}$ es positiva semidefinida para un mapeo CP. 
+%         \item $\mathrm{Tr}_2(\Lambda) = I$ ssi es TP.
+%     \end{itemize}
+% \end{columns}
+% \end{frame}
+
 \begin{frame}{Conceptos Fundamentales}
 \framesubtitle{Canales Cuánticos}
 
 \begin{columns}
-    \column{0.60\textwidth}
-    \begin{itemize}
-        \item Un \textbf{canal cuántico} $\mathcal{E}$ describe cómo evoluciona un estado cuántico, incluyendo interacciones con el entorno (ruido).
-
-        \medskip
-        \item Estos canales deben ser:
+  \column{0.58\textwidth}
+  \begin{itemize}
+    \item Un \textbf{canal cuántico} $\mathcal{E}$ modela la evolución de un sistema cuántico.
+    \bigskip
+        \item Se pueden representar por una única \textbf{matriz de Choi}:
+    \bigskip
+            \item Estos canales deben ser:
         \begin{itemize}
             \item \textbf{Completamente positivos (CP)}
             \item \textbf{Preservadores de la traza (TP)}
         \end{itemize}
 
-        \bigskip
-        \item Se pueden representar mediante una \textbf{matriz de Choi}, que es única para cada canal.
-    \end{itemize}
+  \end{itemize}
 
-    \column{0.42\textwidth}
-    \vspace{2 em}
-    $$
-    \mathcal{E}(\rho) \rightarrow \rho'
-    $$
-    % \smallskip
-    $$
-    \Lambda_{\mathcal{E}} = \sum_{i, j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j})
-    $$
-    $$
-    \mathcal{E} (\rho) = \text{Tr}_1 [ \Lambda (\rho^{T} \otimes I)]
-    $$
-    \begin{itemize}
-        \item $\Lambda_{\mathcal{E}}$ es positiva semidefinida para un mapeo CP. 
-        \item $\mathrm{Tr}_2(\Lambda) = I$ ssi es TP.
-    \end{itemize}
+  \column{0.42\textwidth}
+  \vspace{0.3em}
+  \centering
+  $\mathcal{E}(\rho) \mapsto \rho'$
+  
+  \bigskip
+  % \small
+  $\displaystyle
+  \Lambda_{\mathcal{E}}
+  = \sum_{i,j=1}^{d} \ketbra{i}{j} \otimes \mathcal{E}(\ketbra{i}{j})
+  $
+  
+  \bigskip
+  \bigskip
+  \scriptsize
+  CP $\Rightarrow \Lambda_{\mathcal{E}}\geq 0$\quad;\quad
+  TP $\Leftrightarrow \mathrm{Tr}_2(\Lambda_{\mathcal{E}})=I$
+  
+  % (opcional, si quieres una línea técnica extra)
+  % \vspace{0.3em}
+  % \tiny $\mathcal{E}(\rho)=\mathrm{Tr}_1\!\left[\Lambda_{\mathcal{E}}(\rho^{T}\!\otimes I)\right]$
 \end{columns}
 \end{frame}
 
+
 %======================================
+% \begin{frame}{Conceptos Fundamentales}
+% \framesubtitle{Circuitos Cuánticos}
+
+% \begin{columns}
+% \column{0.50\textwidth}
+% \begin{itemize}
+%     \item Un circuito cuántico es una secuencia de operaciones sobre uno o más \textbf{qubits}, representados por líneas horizontales.
+
+%     \medskip
+%     \item Las \textbf{compuertas cuánticas} son operadores que modifican el estado del qubit, se representan por 'cajas'.
+
+%     \medskip
+%     \item Las compuertas que involucran múltiples qubits, son \textbf{compuertas de control}.
+
+%     \medskip
+%     \item Una \textbf{medición} colapsa el estado cuántico en un resultado clásico.
+% \end{itemize}
+
+% \column{0.42\textwidth}
+% \begin{figure}[h]
+%     \centering
+%     \begin{quantikz}
+%     \lstick{$\ket{0}$} & \gate{X} & \ctrl{1} & \qw  & \meter{} \\
+%     \lstick{$\ket{0}$} & \qw & \gate{R_y} & \qw  & \qw
+%     \end{quantikz}
+% \end{figure}
+
+% \smallskip
+% \begin{itemize}
+%     \item[] \begin{quantikz}
+%        \lstick{$\ket{\psi}$} & \qw
+%     \end{quantikz} = qubit
+%     \item[] \begin{quantikz}
+%         \gate{X}
+%     \end{quantikz} = compuerta
+%     \item[] $\bullet$ = control
+%     \item[] \begin{quantikz}
+%         \meter{}
+%     \end{quantikz} = medición
+% \end{itemize}
+
+% \end{columns}
+% \end{frame}
+% %=========================================
+
 \begin{frame}{Conceptos Fundamentales}
 \framesubtitle{Circuitos Cuánticos}
 
-\begin{columns}
-\column{0.50\textwidth}
-\begin{itemize}
-    \item Un circuito cuántico es una secuencia de operaciones sobre uno o más \textbf{qubits}, representados por líneas horizontales.
-
-    \medskip
-    \item Las \textbf{compuertas cuánticas} son operadores que modifican el estado del qubit, se representan por 'cajas'.
-
-    \medskip
-    \item Las compuertas que involucran múltiples qubits, son \textbf{compuertas de control}.
-
-    \medskip
-    \item Una \textbf{medición} colapsa el estado cuántico en un resultado clásico.
-\end{itemize}
-
-\column{0.42\textwidth}
-\begin{figure}[h]
-    \centering
-    \begin{quantikz}
-    \lstick{$\ket{0}$} & \gate{X} & \ctrl{1} & \qw  & \meter{} \\
-    \lstick{$\ket{0}$} & \qw & \gate{R_y} & \qw  & \qw
-    \end{quantikz}
-\end{figure}
-
-\smallskip
-\begin{itemize}
-    \item[] \begin{quantikz}
-       \lstick{$\ket{\psi}$} & \qw
-    \end{quantikz} = qubit
-    \item[] \begin{quantikz}
-        \gate{X}
-    \end{quantikz} = compuerta
-    \item[] $\bullet$ = control
-    \item[] \begin{quantikz}
-        \meter{}
-    \end{quantikz} = medición
-\end{itemize}
-
-\end{columns}
+\centering
+\resizebox{0.9\linewidth}{!}{%
+\begin{quantikz}[row sep=0.6cm, column sep=0.9cm]
+\lstick{$\ket{0}$\\ \footnotesize qubit}
+  & \gate{X}
+    \gategroup[
+      wires=1,steps=1,background,
+      style={dashed,rounded corners,inner xsep=2pt,inner ysep=2pt},
+      label style={label position=above,yshift=15pt,text width=2.6cm,align=center}
+    ]{\footnotesize Compuerta \ Cuántica}
+  & \ctrl{1}
+    \gategroup[
+      wires=2,steps=1,background,
+      style={dashed,rounded corners,inner xsep=2pt,inner ysep=2pt},
+      label style={label position=above,yshift=20pt,text width=1.5cm,align=center}
+    ]{\footnotesize Compuerta \\de Control}
+  & \qw
+  & \meter{}
+    \gategroup[
+      wires=1,steps=1,background,
+      style={dashed,rounded corners,inner xsep=2pt,inner ysep=2pt},
+      label style={label position=above,yshift=6pt,text width=2.2cm,align=center}
+    ]{\footnotesize Medición}
+\\
+\lstick{$\ket{0}$\\ \footnotesize qubit}
+  & \qw
+  & \gate{R_y(\theta)}
+  & \qw
+  & \qw
+\end{quantikz}%
+}
 \end{frame}
-%=========================================
+%======================
+
 
 
 
@@ -294,10 +374,10 @@
 \begin{columns}
     \column{0.65\textwidth}
     \begin{itemize}
-        \item La \textbf{tomografía de proceso} permite reconstruir un canal cuántico $\mathcal{E}$ a partir de mediciones sobre diferentes estados de entrada.
+        \item La \textbf{tomografía de proceso} permite reconstruir un canal cuántico $\mathcal{E}$ experimentalmente, a partir de mediciones.
 
-        \medskip
-        \item Las salidas $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$ permiten reconstruir $\Lambda_{\mathcal{E}}$.
+        % \medskip
+        % \item Las salidas $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$ permiten reconstruir $\Lambda_{\mathcal{E}}$.
 
         \medskip
         \item La \textbf{fidelidad de proceso} compara la matriz de Choi reconstruida con la ideal:
@@ -320,9 +400,9 @@
     \lstick{$\ket{+i}$} & \gate{\mathcal{E}} & \qw & \rstick{$\rho_4$}
     \end{quantikz}
 
-    \vspace{1em}
-    \small
-    $\rho_j = \mathcal{E}(\ketbra{\psi_j}{\psi_j})$
+    % \vspace{1em}
+    % \small
+    % $\rho_j = \mathcal{E}(\ketbra{\psi_j}{\psi_j})$
 \end{columns}
 \end{frame}
 
@@ -363,38 +443,65 @@
 %------------------------------------------------
 
 
-%--------------------------------------------------
+% %--------------------------------------------------
 
-\section{Algoritmos Variacionales Cuánticos}
-%------------------------------------------------
+% \section{Algoritmos Variacionales Cuánticos}
+% %------------------------------------------------
 
+% \begin{frame}{Algoritmos Variacionales Cuánticos}
+% \begin{itemize}
+%     \item Combinan computación cuántica y optimización clásica para resolver tareas específicas.
+    
+%     \item Se basan en un circuito cuántico parametrizado $U(\bm{\theta})$ aplicado sobre un estado inicial $\ket{\psi_0}$:
+%     \begin{equation*}
+%     \ket{\psi(\bm{\theta})} = U(\bm{\theta}) \ket{\psi_0},   
+%     \end{equation*}    
+%     donde $\bm{\theta}$ es optimizado para minimizar una función de costo $C(\bm{\theta})$.
+    
+%     \item Buscan:
+%     \begin{equation*}
+%         \bm{\theta}^* = \underset{\bm{\theta}}{\text{arg min}}\, C(\bm{\theta}).        
+%     \end{equation*}
+% \end{itemize}
+% \end{frame}
+
+%=======================================
 \begin{frame}{Algoritmos Variacionales Cuánticos}
-\begin{itemize}
-    \item Combinan computación cuántica y optimización clásica para resolver tareas específicas.
-    
-    \item Se basan en un circuito cuántico parametrizado $U(\bm{\theta})$ aplicado sobre un estado inicial $\ket{\psi_0}$:
-    \begin{equation*}
-    \ket{\psi(\bm{\theta})} = U(\bm{\theta}) \ket{\psi_0},   
-    \end{equation*}    
-    donde $\bm{\theta}$ es optimizado para minimizar una función de costo $C(\bm{\theta})$.
-    
-    \item Buscan:
-    \begin{equation*}
-        \bm{\theta}^* = \underset{\bm{\theta}}{\text{arg min}}\, C(\bm{\theta}).        
-    \end{equation*}
-\end{itemize}
+\begin{columns}
+
+  \column{0.56\textwidth}
+  \begin{itemize}
+    \item Combinan computación cuántica con optimización clásica.
+    \bigskip
+    \item Preparan un estado mediante un \textbf{circuito parametrizado}.
+    \bigskip
+    \item Los parámetros $\boldsymbol{\theta}$ se ajustan minimizando una \textbf{función de costo} $C$.
+  \end{itemize}
+
+  \column{0.44\textwidth}
+ \bigskip
+  $$
+    \ket{\psi(\boldsymbol{\theta})}=U(\boldsymbol{\theta})\,\ket{\psi_0}
+  $$
+  \bigskip
+  \medskip
+  $$
+    \boldsymbol{\theta}^{*}=\arg\min_{\boldsymbol{\theta}}\, C(\boldsymbol{\theta})
+  $$
+
+\end{columns}
 \end{frame}
 
 %-------------------------------------------------
 \begin{frame}{Algoritmos Variacionales Cuánticos}
 \framesubtitle{Hardware Efficient Ansatz (HEA)}
 \begin{columns}[c]
-\column{.60\textwidth} 
+\column{.50\textwidth} 
     \begin{itemize}
         \item El \textit{ansatz} define la estructura de $U(\bm{\theta})$ , así como el tipo de compuertas cuánticas.
-       
-        \item El HEA usa compuertas nativas del dispositivo cuántico, además son agnósticos al problema a resolver.
-       
+       \medskip
+        \item Los HEA son agnósticos al problema a resolver.
+       \bigskip
         \item Escogimos el HEA:
         \begin{equation*}
         % \label{ec:ansatz}
@@ -403,9 +510,10 @@
     \end{itemize}
     
 \column{0.5\textwidth}
-    \begin{center}
+    \begin{figure}[t]
+        % \centering
         \includegraphics[width=1\linewidth]{imagenes/hu liu.png}
-    \end{center}
+    \end{figure}
 \end{columns}
 \end{frame}
 
@@ -475,6 +583,7 @@
 
 \begin{columns}
     \column{0.50\textwidth}
+    \small
     \begin{itemize}
         \item Se fijaron hiperparámetros: HEA de 1 capa y 2 qubits.
         \item Tiempo máximo de ejecución (gratuito) mensual: 10 minutos.
@@ -508,10 +617,11 @@
 
     \column{.45\textwidth}
     \begin{itemize}
-        \item El simulador cuántico (\texttt{AerSimulator}) mantiene fidelidades altas y estables ante la depolarización.
-        \item El dispositivo real (\texttt{ibm-kyoto}) presenta mayor variabilidad y fidelidades más bajas.
+        \item El simulador cuántico (\texttt{AerSimulator}) mantiene fidelidades altas y estables.
+        \item El dispositivo real (\texttt{ibm-kyoto}) presenta mayor variabilidad.
         
         \medskip
+        \small
         \item \textbf{Aer:} 
         \begin{itemize}
             \item Mediana: 0.96, Mínimo: 0.76
@@ -530,18 +640,19 @@
 \begin{frame}{Resultados}
 \framesubtitle{Completa Positividad}
 
-\begin{columns}[c] % "c" para centrado vertical
+\begin{columns}
 
-    \column{0.40\textwidth}
+    \column{0.42\textwidth}
     \begin{itemize}
         \item Evaluamos la \textbf{completa positividad (CP)} a través de los autovalores de las matrices de Choi reconstruidas.
-        \item En todos los casos, los autovalores fueron $\geq 0$, cumpliendo con la condición de CP tanto en simulaciones como en hardware real.
+        \bigskip
+        \item En todos los casos, los autovalores fueron $\geq 0$.
     \end{itemize}
 
-    \column{0.60\textwidth}
-    \vspace{-1em} % opcional para ajustar espacio superior
-    \hspace*{-1.5em} % mueve la imagen a la izquierda
-    \includegraphics[width=\linewidth]{imagenes/eigenvalores_comparacion.png}
+    \column{0.52\textwidth}
+    % \vspace{-1em} % opcional para ajustar espacio superior
+    \hspace*{-1.0em} % mueve la imagen a la izquierda
+    \includegraphics[width=\linewidth,height=0.65\textheight]{imagenes/eigenvalores_comparacion.png}
     
 \end{columns}
 
@@ -551,7 +662,7 @@
 \begin{frame}{Resultados}
 \framesubtitle{Preservación de la Traza}
 
-\begin{columns}[c] % Centrado vertical
+\begin{columns}
     \column{0.40\textwidth}
     \begin{itemize}
         \item Evaluamos la \textbf{preservación de la traza (TP)} sobre las matrices de Choi reconstruidas.
@@ -560,7 +671,7 @@
         \item Ninguna de las matrices reconstruidas cumple exactamente con $\mathrm{Tr}_2(\Lambda) = I$.
 
         \medskip
-        \item La traza parcial fue cercana a la identidad, pero se observaron componentes fuera de la diagonal.
+        \item La traza parcial fue cercana a la identidad.
     \end{itemize}
 
     \column{0.50\textwidth}
@@ -579,52 +690,90 @@
 \end{frame}
 
 
-\begin{frame}{Resultados}
-\framesubtitle{Tendencias}
-    \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+% \begin{frame}{Resultados}
+% \framesubtitle{Tendencias}
+%     \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-        \column{.50\textwidth} % Left column and width
-        \begin{figure}[h]
-                \centering
-                \includegraphics[scale=0.34]{imagenes/Regresion Fidelidad sim.png}
-            \end{figure}
-        \begin{itemize}
-            \item $F_{proc\_sim}(p) = 0.0371 \cdot p + 0.9346$
-            \item $R^2 = 0.0612$
-            \item $\chi^2 = 0.0633$
-        \end{itemize}
-        \column{.50\textwidth} % Right column and width
-            \begin{figure}[h]
-                \centering
-                \includegraphics[scale=0.34]{imagenes/Regresion Fidelidad_qc.png}
-            \end{figure}
-            \begin{itemize}
-            \item $ F_{proc\_qc}(p) = 0.2707 \cdot p + 0.7376$
-            \item $R^2 = 0.7055$
-            \item $\chi^2 = 0.1085$
-        \end{itemize}
-    \end{columns}
+%         \column{.50\textwidth} % Left column and width
+%         \begin{figure}[h]
+%                 \centering
+%                 \includegraphics[scale=0.34]{imagenes/Regresion Fidelidad sim.png}
+%             \end{figure}
+%         \begin{itemize}
+%             \item $F_{proc\_sim}(p) = 0.0371 \cdot p + 0.9346$
+%             \item $R^2 = 0.0612$
+%             \item $\chi^2 = 0.0633$
+%         \end{itemize}
+%         \column{.50\textwidth} % Right column and width
+%             \begin{figure}[h]
+%                 \centering
+%                 \includegraphics[scale=0.34]{imagenes/Regresion Fidelidad_qc.png}
+%             \end{figure}
+%             \begin{itemize}
+%             \item $ F_{proc\_qc}(p) = 0.2707 \cdot p + 0.7376$
+%             \item $R^2 = 0.7055$
+%             \item $\chi^2 = 0.1085$
+%         \end{itemize}
+%     \end{columns}
+% \end{frame}
+
+\begin{frame}{Resultados}
+\framesubtitle{Tendencias en la Fidelidad de Proceso}
+
+\begin{columns}
+
+  \column{0.45\textwidth}
+  \begin{figure}[t]
+    \centering
+    \includegraphics[width=0.93\linewidth]{imagenes/Regresion Fidelidad sim.png}
+    \vspace{0.6em}
+    \includegraphics[width=0.93\linewidth]{imagenes/Regresion Fidelidad_qc.png}
+  \end{figure}
+
+  \column{0.45\textwidth}
+  \begin{itemize}
+    % \smallskip
+    \small
+    \item Estudiamos la relación entre la fidelidad de proceso $F_{\mathrm{proc}}$ y el parámetro de despolarización $p$, mediante regresión lineal:
+    $$
+    F_{\mathrm{proc}}(p) = a\,p + b
+    $$
+
+    \item En el \textbf{simulador} (\texttt{Aer}): fidelidad casi constante con
+    $$
+    a = 0.0371,\quad R^2 = 0.06
+    $$
+
+    \item En la \textbf{computadora cuántica} (\texttt{ibm\_kyoto}): fidelidad aumenta con $p$
+    $$
+    a = 0.2707,\quad R^2 = 0.71
+    $$
+
+  \end{itemize}
+\end{columns}
 \end{frame}
+
+
 
 \begin{frame}{Resultados}
 \framesubtitle{Desviación estándar}
 
 \begin{columns}
-    \column{0.37\textwidth}
+    \column{0.40\textwidth}
     \begin{itemize}
         \item Analizamos la \textbf{variabilidad de fidelidad} mediante la desviación estándar.
         
       
-        \medskip
-        \item En la computadora cuántica, la desviación disminuye al aumentar $p$, consistente con la regresión lineal.
+        \bigskip
+        \item En la computadora cuántica, la desviación disminuye al aumentar $p$.
 
-        \medskip
-        \item Para $p > 0.75$, ambos sistemas muestran una caída significativa en su desviación.
+        % \medskip
+        % \item Para $p > 0.75$, ambos sistemas muestran una caída significativa en su desviación.
     \end{itemize}
 
     \column{0.60\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{imagenes/Comparacion_desviaciones.png}
+    \includegraphics[width=0.90\linewidth]{imagenes/Comparacion_desviaciones.png}
 
     \vspace{0.5em}
     {\scriptsize Comparación de desviaciones estándar.}
@@ -632,24 +781,57 @@
 
 \end{frame}
 
+% \begin{frame}{Resultados}
+% \framesubtitle{Matrices de Choi}
+% \begin{figure}
+%   \centering
+%   \begin{subfigure}[t]{0.65\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.1.png}
+%     \caption{Resultados para $p=0.1$}
+%     % \label{fig:1x2_A}
+%   \end{subfigure}\hfill
+%   \begin{subfigure}[t]{0.65\textwidth}
+%     \centering
+%     \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
+%     \caption{Resultados para $p=0.7$}
+%     % \label{fig:1x2_B}
+%   \end{subfigure}
+%   % \caption{}
+% \end{figure}
+% \end{frame}
+
 \begin{frame}{Resultados}
 \framesubtitle{Matrices de Choi}
-\begin{figure}
-  \centering
-  \begin{subfigure}[t]{0.65\textwidth}
+
+\begin{columns}
+
+  % Columna izquierda: figuras
+  \column{0.58\textwidth}
+  \begin{figure}
     \centering
-    \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.1.png}
-    \caption{Resultados para $p=0.1$}
-    % \label{fig:1x2_A}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.65\textwidth}
-    \centering
-    \includegraphics[width=\linewidth,height=0.60\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
-    \caption{Resultados para $p=0.7$}
-    % \label{fig:1x2_B}
-  \end{subfigure}
-  % \caption{}
-\end{figure}
+    \begin{subfigure}[t]{\linewidth}
+      \includegraphics[width=\linewidth,height=0.48\textheight,keepaspectratio]{imagenes/comp_choi_p0.1.png}
+      \caption{Resultados para $p=0.1$}
+    \end{subfigure}
+    \vspace{1em}
+    \begin{subfigure}[t]{\linewidth}
+      \includegraphics[width=\linewidth,height=0.48\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
+      \caption{Resultados para $p=0.7$}
+    \end{subfigure}
+  \end{figure}
+
+  % Columna derecha: bullets
+  \column{0.42\textwidth}
+  \begin{itemize}
+    % \bigskip
+    \item Desde un inicio, la computadora cuántica introduce coherencia (entradas no diagonales).
+    \bigskip
+    \item A medida que $p$ crece, la fidelidad mejora al acercarse a un estado completamente mixto.
+  \end{itemize}
+
+\end{columns}
+
 \end{frame}
 
 
