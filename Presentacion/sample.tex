@@ -23,7 +23,7 @@
 %    TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title{Implementación de canales cuánticos de un qubit usando Algoritmos Variacionales Cuánticos}
+\title{Implementación de canales cuánticos de un qubit usando algoritmos variacionales cuánticos}
     \author{Felipe Ixcamparic \\
 \textbf{Asesores:} Dr. Carlos Pineda y Dr. Giovanni Ramírez}
 
@@ -55,7 +55,7 @@
     \titlepage
 \end{frame}
 
-\begin{frame}{Overview}
+\begin{frame}{Descripción General}
     % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
     \tableofcontents
 \end{frame}
@@ -67,10 +67,10 @@
 \begin{frame}{Introducción}
 \vspace{-0.4em}
 \begin{itemize}
-    \item En la computación cuántica, modelar cómo evoluciona un sistema abierto es fundamental.
+    \item En el estudio de sistemas cuánticos, modelar cómo evoluciona un sistema abierto es fundamental.
     
     \medskip
-    \item Esto se describe mediante \textbf{canales cuánticos}: operadores que representan la interacción del sistema con su entorno.
+    \item Esto se describe mediante \textbf{canales cuánticos}: operadores que representan la interacción del sistema con un entorno.
 
     \medskip
     \item Sin embargo, los canales cuánticos ideales son difíciles de implementar en dispositivos reales debido al \textbf{ruido cuántico}.
@@ -127,20 +127,22 @@
 \begin{columns}
     \column{0.60\textwidth}
     \begin{itemize}
-        \item Un estado cuántico puro se representa por un vector:
-
         \bigskip
-        \medskip
+        \item Un sistema cuántico se describe por un estado cuántico puro:
+        \bigskip
+        \bigskip
+        % \bigskip
         \item La \textbf{matriz densidad} $\rho$ describe tanto estados puros como mezclas estadísticas (mixtos).
         \bigskip
         \medskip
         \item Cuando el sistema está compuesto por dos partes ($A$ y $B$), podemos usar la \textbf{traza parcial} para estudiar solo una de ellas.
 
     \end{itemize}
-
     \column{0.42\textwidth}
     $$
-    \ket{\psi} = \sum_i c_i \ket{i}
+    \ket{\psi} = \sum_{i=1}^d c_i \ket{i},
+    \qquad 
+    \sum_i |c_i|^2 = 1
     $$
     \smallskip
     $$
@@ -150,7 +152,6 @@
     \end{cases}
     $$
     \medskip
-    
     $$
     \mathcal{H}_{AB} = \mathcal{H}_{A} \otimes \mathcal{H}_B
     $$
@@ -245,7 +246,7 @@
 \begin{columns}
   \column{0.58\textwidth}
   \begin{itemize}
-    \item Un \textbf{canal cuántico} $\mathcal{E}$ modela la evolución de un sistema cuántico.
+    \item Un \textbf{canal cuántico} $\mathcal{E}$ modela la evolución de un sistema cuántico tomando en cuenta la influencia de un entorno.
     \bigskip
         \item Se pueden representar por una única \textbf{matriz de Choi}:
     \bigskip
@@ -374,7 +375,7 @@
 \begin{columns}
     \column{0.65\textwidth}
     \begin{itemize}
-        \item La \textbf{tomografía de proceso} permite reconstruir un canal cuántico $\mathcal{E}$ experimentalmente, a partir de mediciones.
+        \item La \textbf{tomografía de proceso} permite reconstruir un canal cuántico $\Lambda_\mathcal{E}$ experimentalmente, a partir de mediciones.
 
         % \medskip
         % \item Las salidas $\mathcal{E}(\ketbra{\psi_j}{\psi_j})$ permiten reconstruir $\Lambda_{\mathcal{E}}$.
@@ -471,7 +472,7 @@
 
   \column{0.56\textwidth}
   \begin{itemize}
-    \item Combinan computación cuántica con optimización clásica.
+    \item Combinan computación cuántica con optimización clásica para resolver una tarea.
     \bigskip
     \item Preparan un estado mediante un \textbf{circuito parametrizado}.
     \bigskip
@@ -527,7 +528,7 @@
         \end{figure}
 \end{frame}
 
-\section{Resultados para el Canal Despolarizante de un qubit}
+\section{Resultados para el canal despolarizante de un qubit}
 %------------------------------------------------
 
 \begin{frame}{Resultados}
@@ -585,7 +586,7 @@
     \column{0.50\textwidth}
     \small
     \begin{itemize}
-        \item Se fijaron hiperparámetros: HEA de 1 capa y 2 qubits.
+        \item Se fijaron hiperparámetros: HEA de 1 capa y 4 qubits.
         \item Tiempo máximo de ejecución (gratuito) mensual: 10 minutos.
         \item Cada tomografía de proceso toma en promedio 16 segundos.
         \item Validación realizada:
@@ -816,8 +817,8 @@
     \end{subfigure}
     \vspace{1em}
     \begin{subfigure}[t]{\linewidth}
-      \includegraphics[width=\linewidth,height=0.48\textheight,keepaspectratio]{imagenes/comp_choi_p0.7.png}
-      \caption{Resultados para $p=0.7$}
+      \includegraphics[width=\linewidth,height=0.48\textheight,keepaspectratio]{imagenes/comp_choi_p0.8.png}
+      \caption{Resultados para $p=0.8$}
     \end{subfigure}
   \end{figure}
 
@@ -866,6 +867,17 @@
     
     % \item El estudio demuestra que los VQA son una herramienta prometedora para simular canales cuánticos en hardware cuántico, aunque su desempeño está condicionado por el ruido y la calidad del dispositivo.
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Trabajo Futuro}
+\begin{itemize}
+\item Explorar nuevos tipos de \textit{ansatz}, más allá del HEA, para mejorar el desempeño en computadoras cuánticas reales.
+
+\item Extender la implementación a canales cuánticos de múltiples qubits, considerando los desafíos de escalabilidad y ruido.
+
+\item Realizar la optimización directamente en hardware cuántico, evaluando otras plataformas con menor restricción de tiempo.
+\end{itemize}
+    
 \end{frame}
 
 %------------------------------------------------
