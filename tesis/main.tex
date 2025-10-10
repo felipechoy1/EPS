@@ -136,7 +136,7 @@
 \newcommand{\ep}{\textbf{Fuente:} elaboración propia.}
 \newcommand{\subind}[2]{{}_{#1}^{#2}}
 \newcommand{\ruskaiMap}{canal diagonal de Pauli constante sobre los ejes}
-\newcommand{\ruskai}{canales diagonales de Pauli constantes sobre los ejes}
+\newcommand{\mybraket}[2]{\left\langle #1 \middle| #2 \right\rangle}
 %%%%%%%%%%%   Fin definición de comandos   %%%%%%%%%%%%%%%%%%
 \usepackage{tikz}
 \usetikzlibrary{quantikz}
@@ -149,6 +149,7 @@
 \usepackage{colortbl}
 \usepackage{csquotes}
 \usepackage{enumitem}
+\usepackage{xparse}
 
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
@@ -169,9 +170,18 @@
 {1}%						% física 1; matemática 2
 {Implementación de canales cuánticos \\ de un qubit usando Algoritmos Variacionales Cuánticos}%		% Título del trabajo de graduación
 {Felipe Antonio Ixcamparic Choy}%			% autor
-{Dr. Carlos Francisco Pineda Zorrilla\\y Dr. Ángel Giovanni Ramírez García}%			% asesor
-{agosto de 2025}		% mes y año de la orden de impresión
+{Dr. Carlos Francisco Pineda Zorrilla\\y Dr. Ángel Giovanni Ramírez García}%			 % asesor
+{octubre de 2025}		% mes y año de la orden de impresión
 {2}							% femenino 1; masculino 2
+
+\examenPrivado%
+{M.Sc. Jorge Marcelo Ixquiac Cabrera}        % Director ECFM%
+{Dra. Ana Beatriz Cosenza Muralles}          % Examinador 1%
+{Dr. Juan Adolfo Ponciano}                   % Examinador 2%
+{M.Sc. Edgar Anibal Cifuentes Anléu}         % Examinador 3%
+{M.Sc. Freddy Estudaro Rodríguez Quezada}    % Secretario Académico%académico
+
+
 \chapter*{AGRADECIMIENTOS}
 % \pdfbookmark[1]{AGRADECIMIENTOS}{agr}          % marca en el panel de marcadores del PDF (opcional)
 % \vspace{1em}
@@ -212,37 +222,43 @@ A mi mascota Rex, que ha estado siempre cuidándome mañana y noche que he traba
 \tableofcontents    % Índice general vinculado
 \figurasYtablas{1}{1}
 % }}}
-% \chapter*{LISTA DE SÍMBOLOS} % {{{
-% % \phantomsection
-% \addcontentsline{toc}{chapter}{LISTA DE SÍMBOLOS}
+\chapter*{LISTA DE SÍMBOLOS}
+\addcontentsline{toc}{chapter}{LISTA DE SÍMBOLOS}
 
-% \begin{description}[leftmargin=3cm, style=nextline]
-%   \item[$\mathcal{H}$] Espacio de Hilbert o espacio de estado.
-%   \item[$\ket{\psi}$] Representación del vector de estado en la notación de Dirac (\textit{ket}).
-%   \item[$\bra{\psi}$] Vector dual al estado $\ket{\psi}$ (\textit{bra}).
-%   \item[$\braket{\psi|\phi}$] Producto interno entre dos vectores en la notación de Dirac (\textit{braket}).
-%   \item[$\ketbra{\psi}{\phi}$] Producto externo, también llamado \textit{ketbra}.
-%   \item[$\overline{\braket{\psi|\phi}}$] Conjugado complejo del producto interno.
-%   \item[$\rho$] Matriz densidad de un sistema cuántico.
-%   \item[$\rho_{AB}$] Matriz densidad de un sistema compuesto A y B.
-%   \item[$\rho_A = \text{Tr}_B(\rho_{AB})$] Matriz densidad reducida del subsistema A (traza parcial sobre B).
-%   \item[$\text{Tr}(\cdot)$] Operación de traza sobre un operador.
-%   \item[$\gamma$] Pureza de un estado cuántico ($\gamma = \text{Tr}(\rho^2)$).
-%   \item[$\sigma_x, \sigma_y, \sigma_z$] Matrices de Pauli.
-%   \item[$R_x(\theta), R_y(\theta), R_z(\theta)$] Compuertas de rotación alrededor de los ejes X, Y y Z.
-%   \item[$H$] Compuerta de Hadamard.
-%   \item[$\text{CNOT}$] Compuerta de control-X (controlada).
-%   \item[$\Lambda_E$] Matriz de Choi del canal cuántico $E$.
-%   \item[$\{E_k\}$] Conjunto de operadores de Kraus para un canal cuántico.
-%   \item[$E(\rho)$] Acción del canal cuántico $E$ sobre el estado $\rho$.
-%   \item[$p$] Parámetro de despolarización (probabilidad de ruido).
-%   \item[$F(\rho, \sigma)$] Fidelidad entre dos estados cuánticos.
-%   \item[$F_{\text{proc}}$] Fidelidad de proceso cuántico.
-%   \item[$U(\bm{\theta})$] Circuito parametrizado o ansatz en un VQA.
-%   \item[$C(\bm{\theta})$] Función de costo en un algoritmo variacional cuántico.
-%   \item[$\bm{\theta}$] Vector de parámetros del ansatz.
-%   \item[$\text{argmin}(-C(\bm{\theta}))$] Optimización clásica sobre los parámetros del VQA.
+\begin{longtable}{@{}p{4cm}p{11cm}@{}}  % ajusta 4cm/11cm según márgenes
+\textsf{Símbolo} & \textsf{Significado}\\[8pt]
+\endhead
+
+$\mathcal{H}$ & Espacio de Hilbert o espacio de estado.\\[6pt]
+$\ket{\psi}$ & Representación del vector de estado en la notación de Dirac (\textit{ket}).\\[6pt]
+$\bra{\psi}$ & Vector dual al estado $\ket{\psi}$ (\textit{bra}).\\[6pt]
+$\braket{\psi|\psi}$ & Producto interno entre dos vectores en la notación de Dirac (\textit{braket}).\\[6pt]
+$\ketbra{\psi}{\phi}$ & Producto externo, también llamado \textit{ketbra}.\\[6pt]
+$\rho$ & Matriz densidad de un sistema cuántico.\\[6pt]
+$\rho_{AB}$ & Matriz densidad de un sistema compuesto A y B.\\[6pt]
+$\rho_A = \text{Tr}_B(\rho_{AB})$ & Matriz densidad reducida del subsistema A (traza parcial sobre B).\\[6pt]
+$\text{Tr}(\cdot)$ & Operación de traza sobre un operador.\\[6pt]
+$\gamma$ & Pureza de un estado cuántico ($\gamma = \text{Tr}(\rho^2)$).\\[6pt]
+$\sigma_x, \sigma_y, \sigma_z$ & Matrices de Pauli.\\[6pt]
+$R_x(\theta), R_y(\theta), R_z(\theta)$ & Compuertas de rotación alrededor de los ejes X, Y y Z.\\[6pt]
+$H$ & Compuerta de Hadamard.\\[6pt]
+$\text{CNOT}$ & Compuerta de control-X (controlada).\\[6pt]
+$\Lambda_\mathcal{E}$ & Matriz de Choi del canal cuántico $\mathcal{E}$.\\[6pt]
+$\{E_k\}$ & Conjunto de operadores de Kraus para un canal cuántico.\\[6pt]
+$\mathcal{E}(\rho)$ & Acción del canal cuántico $\mathcal{E}$ sobre el estado $\rho$.\\[6pt]
+$p$ & Parámetro de despolarización (probabilidad de ruido).\\[6pt]
+$F(\rho, \sigma)$ & Fidelidad entre dos estados cuánticos.\\[6pt]
+$F_{\text{proc}}$ & Fidelidad de proceso cuántico.\\[6pt]
+$U(\bm{\theta})$ & Circuito parametrizado o ansatz en un VQA.\\[6pt]
+$C(\bm{\theta})$ & Función de costo en un algoritmo variacional cuántico.\\[6pt]
+$\bm{\theta}$ & Vector de parámetros de un ansatz.\\[6pt]
+$\text{argmin}(-C(\bm{\theta}))$ & Optimización clásica sobre los parámetros del VQA.\\
+\end{longtable}
+
 % \end{description}
+
+
+
 % % }}}
 \chapter*{OBJETIVOS} % {{{
 % \phantomsection
@@ -1945,9 +1961,60 @@ ellas:
 \bibliographystyle{abbrv}
 \bibliography{references} % Bibliografía
 
+% \newpage
+% \thispagestyle{empty}
+% \null
+\appendix
+\chapter*{A. Matrices de Choi reconstruidas}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\setcounter{figure}{0}
+\begin{figure}[h!]
+    \centering
+    \foreach \p in {0.1, 0.2, 0.3, 0.4} {
+        \begin{subfigure}{\textwidth}
+            \centering
+            \includegraphics[width=0.7\linewidth]{imagenes/comp_choi_p\p.png}
+            \caption[Comparación de matrices de Choi para $p = \p$]{Comparación para $p = \p$}
+            \label{fig:choi_p\p}
+        \end{subfigure}
+        \hspace{0.02\textwidth}
+    }
+    \caption[Comparación de matrices de Choi reconstruidas para $p = 0.1$–$0.4$]{
+    Comparación de matrices de Choi objetivo y matrices reconstruidas en el simulador cuántico \texttt{AerSimulator()} y en la computadora cuántica \texttt{ibm\_kyoto}, para probabilidades de despolarización $p$ entre 0.1 y 0.4. Cada valor representa una componente real de la matriz de Choi. \textbf{Fuente:} elaboración propia.}
+    \label{fig:comparacion_choi_1}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \foreach \p in {0.5, 0.6, 0.7, 0.8} {
+        \begin{subfigure}{\textwidth}
+            \centering
+            \includegraphics[width=0.80\linewidth]{imagenes/comp_choi_p\p.png}
+            \caption[Comparación de matrices de Choi para $p = \p$]{Comparación para $p = \p$}
+            \label{fig:choi_p\p}
+        \end{subfigure}
+        \hspace{0.02\textwidth}
+    }
+    \caption[Comparación de matrices de Choi reconstruidas para $p = 0.5$–$0.8$]{
+    Comparación de matrices de Choi objetivo y matrices reconstruidas en el simulador cuántico \texttt{AerSimulator()} y en la computadora cuántica \texttt{ibm\_kyoto}, para probabilidades de despolarización $p$ entre 0.5 y 0.8. \textbf{Fuente:} elaboración propia.}
+    \label{fig:comparacion_choi_2}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \foreach \p in {0.9, 1.0} {
+        \begin{subfigure}{\textwidth}
+            \centering
+            \includegraphics[width=0.80\linewidth]{imagenes/comp_choi_p\p.png}
+            \caption[Comparación de matrices de Choi para $p = \p$]{Comparación para $p = \p$}
+            \label{fig:choi_p\p}
+        \end{subfigure}
+        \hspace{0.02\textwidth}
+    }
+    \caption[Comparación de matrices de Choi reconstruidas para $p = 0.9$–$1.0$]{
+    Comparación de matrices de Choi objetivo y matrices reconstruidas en el simulador cuántico \texttt{AerSimulator()} y en la computadora cuántica \texttt{ibm\_kyoto}, para probabilidades de despolarización $p$ entre 0.9 y 1.0. \textbf{Fuente:} elaboración propia.}
+    \label{fig:comparacion_choi_3}
+\end{figure}
 
-% \appendix
-% \chapter*{A.1}
+
 
 % \addcontentsline{toc}{chapter}{A.1}
 \end{document}
